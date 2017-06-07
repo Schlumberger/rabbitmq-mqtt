@@ -40,6 +40,13 @@ DEP_PLUGINS = rabbit_common/mk/rabbitmq-plugin.mk
 ERLANG_MK_REPO = https://github.com/rabbitmq/erlang.mk.git
 ERLANG_MK_COMMIT = rabbitmq-tmp
 
+# Note: Seems to allow to build and reference the deps in https://github.com/rabbitmq/...
+# otherwise, it looks for the deps in a place where they dont exists.
+# I am not sure it is the best way to have the build work, though. But it seems to work :-/
+RABBITMQ_CURRENT_FETCH_URL ?= https://github.com/rabbitmq/$(RABBITMQ_COMPONENT_REPO_NAME).git
+RABBITMQ_CURRENT_PUSH_URL  ?= git@github.com:rabbitmq/$(RABBITMQ_COMPONENT_REPO_NAME).git
+current_rmq_ref = rabbitmq_v3_6_10
+
 include rabbitmq-components.mk
 include erlang.mk
 
